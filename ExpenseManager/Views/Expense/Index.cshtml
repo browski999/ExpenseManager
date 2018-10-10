@@ -60,3 +60,97 @@
     </tbody>
 </table>
 
+<div class="modal fade" id="expenseFormModel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 id="title" class="modal-title">Add Expense</h3>
+            </div>
+            <div class="modal-body" id="expenseFormModelDiv"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="expenseReportModel" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 id="title" class="modal-title">Expense Report</h3>
+            </div>
+            <div class="modal-body" id="expenseReportModelDiv"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var addEditExpenses = function (itemId) {
+        var url = "/Expense/AddEditExpenses?itemId=" + itemId;
+
+        if (itemId > 0)
+            $('#title').html("Edit Expense");
+
+        $("expenseFormModelDiv").load(url, function () {
+            $("#expenseFormModel").modal("show");
+        });
+
+
+        $('#expenseFormModel').on('shown.bs.modal', function () {
+
+            $('#calendar-container .input-group.date').datepicker({
+                todayBtn: true,
+                calendarWeeks: true,
+                todayHighlight: true,
+                autoclose: true,
+                container: '#expenseFormModel modal-body'
+            });
+        });
+    }
+
+    var reportExpense = function () {
+        var url = "/Expense/ExpenseSummary";
+
+        $("#expenseReportModalDiv").load(url, function () {
+            $("#expenseReportModal").modal("show");
+        })
+    }
+
+    var DeleteExpense = function (itemId) {
+
+        var ans = confirm("Do you want to delete item with Item Id:" + itemId);
+
+        if (ans) {
+            $.ajax({
+                type: "POST",
+                url: "/Expense/Delete/" + itemId,
+                success: function () {
+                    window.location.href = "/Expense/Index";
+                }
+            })
+        }
+    }
+
+</script>
+
+<script>
+
+    $('body').on('click', "#btnSubmit", function () {
+
+        var myformdata = $("#expenseForm").serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "/Expense/Create",
+            data: myformdata,
+            success: function () {
+                $("#myModal").modal("hide");
+                window.location.href = "/Expense/Index";
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        })
+    })
+</script>
