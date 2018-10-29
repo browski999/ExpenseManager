@@ -10,7 +10,7 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-dateppicker.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 <h2>Personal Expense Manager</h2>
 <br />
@@ -79,7 +79,7 @@
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
                 <h3 id="title" class="modal-title">Expense Report</h3>
             </div>
-            <div class="modal-body" id="expenseReportModelDiv"></div>
+            <div class="modal-body" id="expenseReportModalDiv"></div>
         </div>
     </div>
 </div>
@@ -92,7 +92,7 @@
         if (itemId > 0)
             $('#title').html("Edit Expense");
 
-        $("expenseFormModelDiv").load(url, function () {
+        $("#expenseFormModelDiv").load(url, function () {
             $("#expenseFormModel").modal("show");
         });
 
@@ -109,7 +109,7 @@
         });
     }
 
-    var reportExpense = function () {
+    var ReportExpense = function () {
         var url = "/Expense/ExpenseSummary";
 
         $("#expenseReportModalDiv").load(url, function () {
