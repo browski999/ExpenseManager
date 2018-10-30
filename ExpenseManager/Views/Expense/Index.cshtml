@@ -8,16 +8,16 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation-datepicker/1.5.6/js/foundation-datepicker.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/foundation-datepicker/1.5.6/css/foundation-datepicker.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 <h2>Personal Expense Manager</h2>
 <br />
 <div>
     <div style="float:left">
-        <button class="btn btn-primary" onclick="AddEditExpenses(0);">Add Expense</button>
-        <button class="btn btn-success" onclick="ReportExpense();">Expense Report</button>
+        <button class="btn btn-primary" onclick="AddEditExpenses(0)">Add Expense</button>
+        <button class="btn btn-success" onclick="ReportExpense()">Expense Report</button>
     </div>
 
     <div style="float:right; width:40%;">
@@ -79,7 +79,7 @@
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
                 <h3 id="title" class="modal-title">Expense Report</h3>
             </div>
-            <div class="modal-body" id="expenseReportModelDiv"></div>
+            <div class="modal-body" id="expenseReportModalDiv"></div>
         </div>
     </div>
 </div>
@@ -92,7 +92,7 @@
         if (itemId > 0)
             $('#title').html("Edit Expense");
 
-        $("expenseFormModelDiv").load(url, function () {
+        $("#expenseFormModelDiv").load(url, function () {
             $("#expenseFormModel").modal("show");
         });
 
@@ -109,7 +109,7 @@
         });
     }
 
-    var reportExpense = function () {
+    var ReportExpense = function () {
         var url = "/Expense/ExpenseSummary";
 
         $("#expenseReportModalDiv").load(url, function () {
